@@ -84,7 +84,7 @@ export default function Login() {
             onClick={() => navigate('/register')}
             className="text-indigo-500 hover:underline"
           >
-            Sign Up
+            Sign Upgit pull origin main
           </button>
         </p>
       </form>
