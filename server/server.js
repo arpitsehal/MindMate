@@ -57,7 +57,7 @@ app.use('*', (req, res) => {
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/api/health`);
   console.log(`Auth endpoints: http://localhost:${PORT}/api/auth`);
