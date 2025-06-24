@@ -6,7 +6,12 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://mind-mate-pied.vercel.app/', // replace with your actual Vercel URL
+  credentials: true
+}));
+  app.use(cors());
 // Middleware
 app.use(cors({
   origin: 'http://localhost:3000', // React app URL
@@ -49,6 +54,8 @@ app.use('*', (req, res) => {
     error: 'Route not found' 
   });
 });
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
