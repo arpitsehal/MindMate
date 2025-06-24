@@ -44,49 +44,49 @@ api.interceptors.response.use(
 export const authAPI = {
   // Register new user
   register: async (userData) => {
-    const response = await api.post('/auth/register', userData);
+    const response = await api.post('/api/auth/register', userData);
     return response.data;
   },
 
   // Login user
   login: async (credentials) => {
-    const response = await api.post('/auth/login', credentials);
+    const response = await api.post('/api/auth/login', credentials);
     return response.data;
   },
 
   // Get user profile
   getProfile: async () => {
-    const response = await api.get('/auth/profile');
+    const response = await api.get('/api/auth/profile');
     return response.data;
   },
 
   // Update user activity (points, streak, last_activity_date)
   updateActivity: async (points) => {
-    const response = await api.post('/auth/update-activity', { points });
+    const response = await api.post('/api/auth/update-activity', { points });
     return response.data;
   },
 
   // Get completed tasks
   getCompletedTasks: async () => {
-    const response = await api.get('/auth/completed-tasks');
+    const response = await api.get('/api/auth/completed-tasks');
     return response.data;
   },
 
   // Update completed tasks
   updateCompletedTasks: async (completedTasks) => {
-    const response = await api.post('/auth/completed-tasks', { completed_tasks: completedTasks });
+    const response = await api.post('/api/auth/completed-tasks', { completed_tasks: completedTasks });
     return response.data;
   },
 
   // Add mood entry
   addMoodEntry: async (mood, note) => {
-    const response = await api.post('/auth/mood', { mood, note });
+    const response = await api.post('/api/auth/mood', { mood, note });
     return response.data;
   },
 
   // Get mood history
   getMoodHistory: async (limit = 30) => {
-    const response = await api.get(`/auth/mood?limit=${limit}`);
+    const response = await api.get(`/api/auth/mood?limit=${limit}`);
     return response.data;
   },
 };
