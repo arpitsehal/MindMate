@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# MindMate 🧠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Node.js CI](https://img.shields.io/badge/Node.js-Express-green)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/Frontend-React-blue)](https://react.dev/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)](https://sqlite.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Available Scripts
+A modern mental wellness tracker and user authentication system built with React, Node.js/Express, and SQLite.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## ✨ Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- User registration & login
+- Secure password hashing (bcrypt)
+- JWT-based authentication
+- SQLite for persistent storage
+- Track mood history and user streaks
+- Modern UI with Tailwind CSS
+- Form validation & error handling
+- "Remember me" functionality
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🗂️ Project Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+mindmate/
+├── src/                # React frontend
+│   ├── pages/          # Login, Register, etc.
+│   ├── services/       # API client
+│   └── ...
+├── server/             # Node.js backend
+│   ├── database.js     # DB setup & helpers
+│   ├── auth.js         # Auth logic
+│   ├── routes/         # API routes
+│   └── server.js       # Express server
+├── public/             # Static assets
+├── package.json        # Frontend dependencies
+└── setup.bat           # Windows setup script
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node.js (v14+)
+- npm
 
-### `npm run eject`
+### Backend Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cd mindmate/server
+npm install
+npm start
+# or for development
+npm run dev
+```
+Backend runs at `http://localhost:5000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+cd mindmate
+npm install
+npm start
+```
+Frontend runs at `http://localhost:3000`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔑 API Endpoints
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Authentication**
+- `POST /api/auth/register` — Register user
+- `POST /api/auth/login` — Login
+- `GET /api/auth/profile` — Get profile (protected)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Mood Tracking**
+- `POST /api/mood` — Add mood entry
+- `GET /api/mood/history` — Get mood history
 
-### Code Splitting
+**Health**
+- `GET /api/health` — Server health check
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🗄️ Database Schema
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**users**
+```sql
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  level INTEGER DEFAULT 0,
+  points INTEGER DEFAULT 0,
+  streak INTEGER DEFAULT 0,
+  last_activity_date TEXT,
+  completed_tasks TEXT DEFAULT "[]",
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-### Making a Progressive Web App
+**mood_history**
+```sql
+CREATE TABLE mood_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  date TEXT NOT NULL,
+  mood INTEGER NOT NULL,
+  note TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🔒 Security
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Passwords hashed with bcrypt
+- JWT for session management
+- CORS configured for API
+- Input validation & sanitization
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## ⚙️ Environment Variables
 
-### `npm run build` fails to minify
+Create a `.env` in `mindmate/server/`:
+```
+JWT_SECRET=your-super-secret-jwt-key
+PORT=5000
+NODE_ENV=production
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 🛠️ Development
+
+- Backend: Express.js, SQLite
+- Frontend: React, Tailwind CSS
+- API: Axios
+
+---
+
+## 🧩 Troubleshooting
+
+- Ensure both servers are running
+- Check CORS errors in browser console
+- Verify DB file permissions
+- Clear browser storage if auth issues
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.

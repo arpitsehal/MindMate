@@ -21,3 +21,19 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# --- MindMate Custom Ignores ---
+# SQLite database
+/server/users.db
+
+# Environment files
+/server/.env
+/server/.env.*
+
+# Backend dependencies
+/server/node_modules
+
+# Backend logs
+/server/npm-debug.log*
+/server/yarn-debug.log*
+/server/yarn-error.log*
