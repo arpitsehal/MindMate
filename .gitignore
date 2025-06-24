@@ -25,8 +25,7 @@ yarn-error.log*
 # --- MindMate Custom Ignores ---
 # SQLite database
 /server/users.db
-
-# Environment files
+.env
 /server/.env
 /server/.env.*
 
