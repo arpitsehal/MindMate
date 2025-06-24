@@ -6,17 +6,17 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const cors = require('cors');
+
+// CORS middleware
+const allowedOrigins = [
+  'https://mind-mate-pied.vercel.app', // Vercel frontend
+  'http://localhost:3000' // Local development
+];
 app.use(cors({
-  origin: 'https://mind-mate-pied.vercel.app/', // replace with your actual Vercel URL
+  origin: allowedOrigins,
   credentials: true
 }));
-  app.use(cors());
-// Middleware
-app.use(cors({
-  origin: 'http://localhost:3000', // React app URL
-  credentials: true
-}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
