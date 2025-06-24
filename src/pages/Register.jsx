@@ -42,69 +42,93 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-center mb-6">Create Account</h2>
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+  {/* Parallax Gradient Background */}
+  <div
+    className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-600 via-blue-500 to-purple-600 animate-pulse opacity-60"
+    style={{
+      backgroundSize: '400% 400%',
+      animation: 'gradient 15s ease infinite'
+    }}
+  />
 
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {error}
-          </div>
-        )}
+  {/* Glassmorphic Registration Form */}
+  <form
+    onSubmit={handleSubmit}
+    className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/30 p-8 rounded-2xl shadow-2xl"
+  >
+    <h2 className="text-3xl font-bold text-white text-center mb-6 drop-shadow-md">Create Account</h2>
 
-        <input 
-          value={first} 
-          onChange={e => setFirst(e.target.value)} 
-          required 
-          placeholder="First Name"
-          disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100" 
-        />
-        <input 
-          value={last} 
-          onChange={e => setLast(e.target.value)} 
-          required 
-          placeholder="Last Name"
-          disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100" 
-        />
-        <input 
-          value={email} 
-          onChange={e => setEmail(e.target.value)} 
-          type="email" 
-          required 
-          placeholder="Email"
-          disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100" 
-        />
-        <input 
-          value={password} 
-          onChange={e => setPassword(e.target.value)} 
-          type="password" 
-          required 
-          placeholder="Password"
-          disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-6 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100" 
-        />
+    {error && (
+      <div className="mb-4 p-3 bg-red-200/60 text-red-800 rounded-md shadow">
+        {error}
+      </div>
+    )}
 
-        <button 
-          type="submit"
-          disabled={loading}
-          className="w-full py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-md hover:from-indigo-600 hover:to-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
-          {loading ? 'Creating Account...' : 'Register'}
-        </button>
+    <input
+      value={first}
+      onChange={e => setFirst(e.target.value)}
+      required
+      placeholder="First Name"
+      disabled={loading}
+      className="w-full px-4 py-3 mb-4 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+    <input
+      value={last}
+      onChange={e => setLast(e.target.value)}
+      required
+      placeholder="Last Name"
+      disabled={loading}
+      className="w-full px-4 py-3 mb-4 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+    <input
+      value={email}
+      onChange={e => setEmail(e.target.value)}
+      type="email"
+      required
+      placeholder="Email"
+      disabled={loading}
+      className="w-full px-4 py-3 mb-4 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+    <input
+      value={password}
+      onChange={e => setPassword(e.target.value)}
+      type="password"
+      required
+      placeholder="Password"
+      disabled={loading}
+      className="w-full px-4 py-3 mb-6 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
 
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <button 
-            type="button"
-            onClick={() => navigate('/login')}
-            disabled={loading}
-            className="text-indigo-500 hover:underline focus:outline-none disabled:opacity-50">
-            Login
-          </button>
-        </p>
-      </form>
-    </div>
+    <button
+      type="submit"
+      disabled={loading}
+      className="w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-semibold shadow-xl transition disabled:opacity-50"
+    >
+      {loading ? 'Creating Account...' : 'Register'}
+    </button>
+
+    <p className="mt-4 text-center text-white/80 text-sm">
+      Already have an account?{' '}
+      <button
+        type="button"
+        onClick={() => navigate('/login')}
+        className="text-indigo-300 hover:underline"
+      >
+        Login
+      </button>
+    </p>
+  </form>
+
+  {/* Background animation */}
+  <style>{`
+    @keyframes gradient {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+  `}</style>
+</div>
+
   );
 }

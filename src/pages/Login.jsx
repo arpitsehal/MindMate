@@ -41,78 +41,98 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-center mb-6">Sign In</h2>
+   <div className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+  {/* Parallax Gradient Background */}
+  <div
+    className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-700 via-blue-500 to-purple-500 animate-pulse opacity-60"
+    style={{
+      backgroundSize: '400% 400%',
+      animation: 'gradient 15s ease infinite'
+    }}
+  />
 
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {error}
-          </div>
-        )}
+  {/* Glassy Login Card */}
+  <form
+    onSubmit={handleSubmit}
+    className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/30 p-8 rounded-2xl shadow-2xl"
+  >
+    <h2 className="text-3xl font-bold text-white text-center mb-6 drop-shadow-md">Sign In</h2>
 
+    {error && (
+      <div className="mb-4 p-3 bg-red-200/60 text-red-800 rounded-md shadow">
+        {error}
+      </div>
+    )}
+
+    <input
+      type="email"
+      placeholder="Email"
+      value={email}
+      onChange={e => setEmail(e.target.value)}
+      required
+      disabled={loading}
+      className="w-full px-4 py-3 mb-4 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      value={password}
+      onChange={e => setPassword(e.target.value)}
+      required
+      disabled={loading}
+      className="w-full px-4 py-3 mb-4 rounded-lg border border-white/30 bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+    />
+
+    <div className="flex justify-between items-center mb-4 text-sm text-white/80">
+      <label className="inline-flex items-center">
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
+          type="checkbox"
+          checked={remember}
+          onChange={e => setRemember(e.target.checked)}
           disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100"
+          className="form-checkbox text-indigo-500 bg-transparent"
         />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-          disabled={loading}
-          className="w-full px-4 py-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:bg-gray-100"
-        />
-
-        <div className="flex items-center justify-between mb-6">
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              checked={remember}
-              onChange={e => setRemember(e.target.checked)}
-              disabled={loading}
-              className="form-checkbox h-4 w-4 text-indigo-600"
-            />
-            <span className="ml-2 text-gray-600">Remember me</span>
-          </label>
-
-          <button
-            type="button"
-            onClick={() => navigate('/forgot-password')}
-            disabled={loading}
-            className="text-sm text-indigo-500 hover:underline disabled:opacity-50"
-          >
-            Forgot password?
-          </button>
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-medium rounded-md hover:from-indigo-600 hover:to-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? 'Signing in...' : 'Login'}
-        </button>
-
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
-          <button
-            type="button"
-            onClick={() => navigate('/register')}
-            disabled={loading}
-            className="text-indigo-500 hover:underline disabled:opacity-50"
-          >
-            Sign Up
-          </button>
-        </p>
-      </form>
+        <span className="ml-2">Remember me</span>
+      </label>
+      <button
+        type="button"
+        onClick={() => navigate('/forgot-password')}
+        className="hover:underline text-indigo-300"
+      >
+        Forgot password?
+      </button>
     </div>
+
+    <button
+      type="submit"
+      disabled={loading}
+      className="w-full py-3 rounded-lg bg-indigo-500 hover:bg-indigo-600 text-white font-semibold shadow-xl transition disabled:opacity-50"
+    >
+      {loading ? 'Signing in...' : 'Login'}
+    </button>
+
+    <p className="mt-4 text-center text-white/80">
+      Don’t have an account?{' '}
+      <button
+        type="button"
+        onClick={() => navigate('/register')}
+        className="text-indigo-300 hover:underline"
+      >
+        Sign Up
+      </button>
+    </p>
+  </form>
+
+  {/* Animated background styling */}
+  <style>{`
+    @keyframes gradient {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+  `}</style>
+</div>
+
   );
 }
