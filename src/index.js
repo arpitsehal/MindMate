@@ -7,6 +7,7 @@ import App from '../src/App.js'; // your dashboard
 import Login from '../src/pages/Login.jsx';
 import Register from '../src/pages/Register.jsx';
 import ForgotPassword from './ForgotPassword.jsx';
+import MindMateLanding from './components/MindMateLanding.jsx';
 
 // PrivateRoute component
 function PrivateRoute({ children }) {
@@ -18,8 +19,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* Root always redirects to login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Root shows the landing page */}
+        <Route path="/" element={<MindMateLanding />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -32,8 +33,8 @@ createRoot(document.getElementById('root')).render(
           </PrivateRoute>
         } />
 
-        {/* Catch-all: redirect invalid URLs to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* Catch-all: redirect invalid URLs to landing page */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

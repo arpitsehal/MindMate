@@ -89,6 +89,12 @@ export const authAPI = {
     const response = await api.get(`/api/auth/mood?limit=${limit}`);
     return response.data;
   },
+
+  // Get leaderboard
+  getLeaderboard: async () => {
+    const response = await api.get('/api/auth/leaderboard');
+    return response.data;
+  },
 };
 
 // Health check

@@ -1,0 +1,158 @@
+@keyframes blob {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.app-bg-gradient {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 50%, #c7d2fe 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.glass-card:hover {
+  box-shadow: 0 12px 40px 0 rgba(80, 70, 229, 0.15);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.glassy-header {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 2px 8px 0 rgba(80, 70, 229, 0.04);
+}
+
+.animated-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  z-index: 0;
+  animation: blob 8s infinite;
+}
+.animated-blob.delay-1 { animation-delay: 2s; }
+.animated-blob.delay-2 { animation-delay: 4s; }
+
+.gradient-title {
+  background: linear-gradient(90deg, #a78bfa, #60a5fa, #a78bfa);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.app-nav-btn {
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+.app-nav-btn.active, .app-nav-btn:focus {
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  color: #fff !important;
+  box-shadow: 0 2px 8px 0 rgba(80, 70, 229, 0.10);
+}
+.app-nav-btn:not(.active):hover {
+  background: rgba(99,102,241,0.08);
+  color: #6366f1;
+}
+
+.logout-btn {
+  background: linear-gradient(90deg, #f87171, #fbbf24);
+  color: #fff;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.logout-btn:hover {
+  background: linear-gradient(90deg, #ef4444, #f59e42);
+  box-shadow: 0 2px 8px 0 rgba(239,68,68,0.10);
+}
+
+/* Tab Content Animations */
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, .glass-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects for cards */
+.glass-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px 0 rgba(80, 70, 229, 0.15);
+}
+
+/* Active tab indicator animation */
+.nav-indicator {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading states */
+.loading-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+} 
