@@ -1,164 +1,163 @@
 # MindMate 🧠
 
-[![Node.js CI](https://img.shields.io/badge/Node.js-Express-green)](https://nodejs.org/)
-[![React](https://img.shields.io/badge/Frontend-React-blue)](https://react.dev/)
-[![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)](https://sqlite.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
-A modern mental wellness tracker and user authentication system built with React, Node.js/Express, and SQLite.
+A modern, AI-powered mental wellness companion to help you track your mood, build healthy habits, and stay motivated—every day.
 
 ---
 
-## ✨ Features
+## ✨ What is MindMate?
 
-- User registration & login
-- Secure password hashing (bcrypt)
-- JWT-based authentication
-- SQLite for persistent storage
-- Track mood history and user streaks
-- Modern UI with Tailwind CSS
-- Form validation & error handling
-- "Remember me" functionality
+**MindMate** is your personal mental wellness platform. It combines science-backed mood tracking, personalized self-care activities, gamified tasks, and a supportive community—all in a beautiful, modern web app. With AI-driven recommendations and analytics, MindMate helps you understand your emotions, build positive routines, and connect with others on your wellness journey.
 
 ---
 
-## 🗂️ Project Structure
+## 🚀 Live Demo
 
-```
-mindmate/
-├── src/                # React frontend
-│   ├── pages/          # Login, Register, etc.
-│   ├── services/       # API client
-│   └── ...
-├── server/             # Node.js backend
-│   ├── database.js     # DB setup & helpers
-│   ├── auth.js         # Auth logic
-│   ├── routes/         # API routes
-│   └── server.js       # Express server
-├── public/             # Static assets
-├── package.json        # Frontend dependencies
-└── setup.bat           # Windows setup script
-```
+- **Frontend:** [https://mind-mate-pied.vercel.app](https://mind-mate-pied.vercel.app)
+- **Backend (API):** [https://mindmate-dspm.onrender.com](https://mindmate-dspm.onrender.com)
 
 ---
 
-## 🚀 Getting Started
+## 🧩 Key Features
+
+- **User Registration & Login:** Secure authentication with JWT and bcrypt
+- **Mood Tracking:** Log your mood daily, add notes, and visualize trends
+- **AI-Powered Recommendations:** Get personalized self-care activities and tasks based on your mood and habits
+- **Gamified Tasks:** Complete mood-based tasks to earn points, level up, and maintain streaks
+- **Leaderboard:** See how you rank in the community by points, level, and streak
+- **Community Support:** Anonymous peer support and weekly challenges
+- **Profile & Privacy:** Manage your data, privacy, and export options
+- **Modern UI:** Responsive, glassmorphic design with smooth transitions
+- **Landing Page:** Beautiful, animated landing page with feature highlights
+
+---
+
+## 🤖 AI Usage in MindMate
+
+- **Personalized Recommendations:**
+  - AI logic suggests activities and tasks tailored to your current mood, time of day, and recent history.
+- **Mood Analytics:**
+  - AI-driven insights help you spot trends and patterns in your mood data.
+- **Future Expansion:**
+  - The architecture supports adding LLM-powered chat, smart journaling, and more advanced AI features.
+
+---
+
+## 🖥️ Screenshots
+
+> _Add screenshots or GIFs here if available._
+
+---
+
+## 🛠️ Installation & Local Setup
 
 ### Prerequisites
-
 - Node.js (v14+)
 - npm
 
-### Backend Setup
+### 1. Clone the Repository
+```sh
+git clone https://github.com/arpitsehal/MindMate.git
+cd MindMate
+```
 
-```bash
+### 2. Backend Setup
+```sh
 cd mindmate/server
 npm install
 npm start
 # or for development
-npm run dev
+yarn dev
 ```
-Backend runs at `http://localhost:5000`
+- The backend runs at [http://localhost:5000](http://localhost:5000)
+- A `users.db` SQLite file is created automatically
+- To set a custom JWT secret, create `.env` in `mindmate/server/`:
+  ```env
+  JWT_SECRET=your-super-secret-jwt-key
+  PORT=5000
+  ```
 
-### Frontend Setup
-
-```bash
-cd mindmate
+### 3. Frontend Setup
+```sh
+cd ../src
 npm install
+# Create .env file:
+echo "REACT_APP_API_URL=http://localhost:5000" > .env
 npm start
 ```
-Frontend runs at `http://localhost:3000`
+- The frontend runs at [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔑 API Endpoints
+## 🗺️ How to Use MindMate
 
-**Authentication**
+1. **Visit the landing page** and explore features, testimonials, and FAQs
+2. **Register or log in** to your account
+3. **Track your mood** daily and add notes
+4. **Get AI-powered activity recommendations** based on your mood
+5. **Complete tasks** to earn points, level up, and maintain streaks
+6. **View your progress** in the dashboard and mood trends
+7. **Join the leaderboard** and see how you rank in the community
+8. **Connect with others** in the community support section
+9. **Manage your profile and privacy** settings
+
+---
+
+## 🧠 Tech Stack
+- **Frontend:** React, Tailwind CSS, Lucide React, React Router
+- **Backend:** Node.js, Express, SQLite
+- **AI/Logic:** Custom AI logic for recommendations and analytics
+- **Other:** JWT, bcrypt, Axios
+
+---
+
+## 🔗 API Endpoints (Summary)
+
 - `POST /api/auth/register` — Register user
 - `POST /api/auth/login` — Login
 - `GET /api/auth/profile` — Get profile (protected)
-
-**Mood Tracking**
-- `POST /api/mood` — Add mood entry
-- `GET /api/mood/history` — Get mood history
-
-**Health**
+- `POST /api/auth/update-activity` — Update points/streak
+- `GET /api/auth/leaderboard` — Get leaderboard
+- `POST /api/auth/mood` — Add mood entry
+- `GET /api/auth/mood` — Get mood history
 - `GET /api/health` — Server health check
 
 ---
 
-## 🗄️ Database Schema
-
-**users**
-```sql
-CREATE TABLE users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
-  email TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  level INTEGER DEFAULT 0,
-  points INTEGER DEFAULT 0,
-  streak INTEGER DEFAULT 0,
-  last_activity_date TEXT,
-  completed_tasks TEXT DEFAULT "[]",
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+## 🗂️ Project Structure
 ```
-
-**mood_history**
-```sql
-CREATE TABLE mood_history (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
-  date TEXT NOT NULL,
-  mood INTEGER NOT NULL,
-  note TEXT,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY(user_id) REFERENCES users(id)
-);
+MindMate/
+├── mindmate/
+│   ├── src/           # React frontend
+│   ├── server/        # Node.js backend
+│   ├── public/        # Static assets
+│   └── ...
+├── README.md          # This file
 ```
 
 ---
 
-## 🔒 Security
-
-- Passwords hashed with bcrypt
-- JWT for session management
-- CORS configured for API
-- Input validation & sanitization
-
----
-
-## ⚙️ Environment Variables
-
-Create a `.env` in `mindmate/server/`:
-```
-JWT_SECRET=your-super-secret-jwt-key
-PORT=5000
-NODE_ENV=production
-```
-
----
-
-## 🛠️ Development
-
-- Backend: Express.js, SQLite
-- Frontend: React, Tailwind CSS
-- API: Axios
-
----
-
-## 🧩 Troubleshooting
-
-- Ensure both servers are running
+## 🧩 Troubleshooting & FAQ
+- Make sure both frontend and backend servers are running
 - Check CORS errors in browser console
-- Verify DB file permissions
-- Clear browser storage if auth issues
+- If you have auth issues, clear browser storage
+- For DB issues, check file permissions in `server/`
+- For help, open an issue or contact the maintainer
+
+---
+
+## 👤 Author & Contact
+
+**Arpit Sehal**  
+- [LinkedIn](https://www.linkedin.com/in/arpitsehal/) ([www.linkedin.com/in/arpitsehal](https://www.linkedin.com/in/arpitsehal/))  
+- Email: [2005sehalarpit@gmail.com](mailto:2005sehalarpit@gmail.com)  
+- [GitHub](https://github.com/arpitsehal)
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License.
+
+---
+
+Enjoy using MindMate! 💙 
