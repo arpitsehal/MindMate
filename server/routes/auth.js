@@ -269,4 +269,40 @@ router.get('/mood', authenticateToken, async (req, res) => {
   }
 });
 
+// Get leaderboard (protected route)
+router.get('/leaderboard', authenticateToken, async (req, res) => {
+  try {
+    const { getAll } = require('../database');
+    const users = await getAll(`
+      SELECT 
+        id, 
+        first_name, 
+        last_name, 
+        points, 
+        level, 
+        streak,
+        created_at
+      FROM users 
+      ORDER BY points DESC, level DESC, streak DESC
+      LIMIT 100
+    `);
+    
+    // Format user data for leaderboard
+    const leaderboard = users.map((user, index) => ({
+      rank: index + 1,
+      id: user.id,
+      name: `${user.first_name} ${user.last_name}`,
+      points: user.points || 0,
+      level: user.level || 0,
+      streak: user.streak || 0,
+      joined: user.created_at
+    }));
+    
+    res.json({ leaderboard });
+  } catch (error) {
+    console.error('Get leaderboard error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router; 
