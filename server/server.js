@@ -9,13 +9,25 @@ const PORT = process.env.PORT || 5000;
 
 // CORS middleware
 const allowedOrigins = [
-  'https://mind-mate-pied.vercel.app', // Vercel frontend
+  'https://mind-mate-pied.vercel.app', // old Vercel frontend
+  'https://mind-mate-dlefsbj5e-arpitsehals-projects.vercel.app', // new Vercel frontend (update this as needed)
   'http://localhost:3000' // Local development
 ];
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
+// Handle preflight requests for all routes
+app.options('*', cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
