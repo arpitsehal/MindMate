@@ -12,7 +12,7 @@ A modern, AI-powered mental wellness companion to help you track your mood, buil
 
 ## 🚀 Live Demo
 
-- **Frontend:** [https://mind-mate-pied.vercel.app](https://mind-mate-pied.vercel.app)
+- **Frontend:** [https://mind-mate-zeta.vercel.app/](https://mind-mate-zeta.vercel.app/)
 - **Backend (API):** [https://mindmate-dspm.onrender.com](https://mindmate-dspm.onrender.com)
 
 ---
